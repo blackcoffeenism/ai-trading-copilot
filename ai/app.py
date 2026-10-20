@@ -37,6 +37,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+def read_root():
+    return {
+        "status": "online",
+        "service": "AI Trading Copilot Analysis Engine",
+        "endpoints": ["/analyze", "/history", "/health"]
+    }
+
+@app.get("/health")
+def health_check():
+    return {"status": "healthy"}
+
 class AnalysisRequest(BaseModel):
     symbol: str
     timeframe: str
