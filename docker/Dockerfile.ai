@@ -1,0 +1,18 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+
+RUN pip install --no-cache-dir \
+    fastapi \
+    uvicorn \
+    pydantic \
+    numpy \
+    torch --index-url https://download.pytorch.org/whl/cpu \
+    transformers \
+    accelerate
+
+COPY ai/ /app/ai/
+
+EXPOSE 8001
+
+CMD ["python", "ai/app.py"]

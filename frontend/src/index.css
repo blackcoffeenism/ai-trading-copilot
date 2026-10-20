@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-secondary-container: #7701d0;
+  --color-surface-container-highest: #323538;
+  --color-surface-dim: #111417;
+  --color-surface: #111417;
+  --color-on-tertiary-fixed: #002111;
+  --color-secondary-fixed: #efdbff;
+  --color-on-error: #690005;
+  --color-on-error-container: #ffdad6;
+  --color-primary-fixed: #dae1ff;
+  --color-on-secondary-container: #dcb7ff;
+  --color-tertiary-fixed-dim: #3be194;
+  --color-on-primary: #002b75;
+  --color-on-primary-container: #f8f7ff;
+  --color-outline: #8c90a1;
+  --color-tertiary-container: #008351;
+  --color-on-background: #e1e2e7;
+  --color-on-surface: #e1e2e7;
+  --color-on-secondary-fixed-variant: #6700b5;
+  --color-surface-container: #1d2023;
+  --color-error: #ffb4ab;
+  --color-surface-variant: #323538;
+  --color-surface-container-low: #191c1f;
+  --color-error-container: #93000a;
+  --color-primary: #b3c5ff;
+  --color-on-surface-variant: #c2c6d8;
+  --color-tertiary-fixed: #60feae;
+  --color-inverse-primary: #0054d6;
+  --color-background: #111417;
+  --color-on-tertiary-fixed-variant: #005231;
+  --color-surface-container-high: #272a2e;
+  --color-on-secondary-fixed: #2c0051;
+  --color-inverse-on-surface: #2e3134;
+  --color-primary-fixed-dim: #b3c5ff;
+  --color-on-secondary: #480081;
+  --color-surface-tint: #b3c5ff;
+  --color-surface-bright: #37393d;
+  --color-tertiary: #3be194;
+  --color-secondary-fixed-dim: #dcb8ff;
+  --color-surface-container-lowest: #0b0e11;
+  --color-on-primary-fixed: #001849;
+  --color-on-tertiary-container: #e5ffeb;
+  --color-secondary: #dcb8ff;
+  --color-on-primary-fixed-variant: #003fa4;
+  --color-inverse-surface: #e1e2e7;
+  --color-outline-variant: #424656;
+  --color-on-tertiary: #003920;
+  --color-primary-container: #0066ff;
+
+  /* Spacing */
+  --spacing-gutter: 16px;
+  --spacing-widget-padding: 20px;
+  --spacing-container-margin: 24px;
+  --spacing-stack-sm: 8px;
+  --spacing-stack-xs: 4px;
+  --spacing-stack-md: 16px;
+  --spacing-stack-lg: 24px;
+  --spacing-unit: 4px;
+
+  /* Border Radius */
+  --radius-default: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+
+  /* Font Families */
+  --font-body-lg: 'Inter', sans-serif;
+  --font-body-md: 'Inter', sans-serif;
+  --font-headline-lg: 'Inter', sans-serif;
+  --font-label-caps: 'Inter', sans-serif;
+  --font-data-md: 'JetBrains Mono', monospace;
+  --font-headline-xl: 'Inter', sans-serif;
+  --font-data-sm: 'JetBrains Mono', monospace;
+  --font-headline-md: 'Inter', sans-serif;
+  --font-data-lg: 'JetBrains Mono', monospace;
+}
+
+/* Base variables for light/dark themes */
+:root {
+  --primary-glow: radial-gradient(rgba(138, 43, 226, 0.15), rgba(0, 102, 255, 0));
+  --font-inter: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Light mode defaults (when html does not have .dark) */
+html {
+  background-color: #f3f4f6;
+  color: #111827;
+  font-family: var(--font-inter);
+  scroll-behavior: smooth;
+}
+
+html.dark {
+  background-color: #0b0e11;
+  color: #e1e2e7;
+}
+
+body {
+  font-family: var(--font-inter);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.data-font {
+  font-family: var(--font-mono);
+}
+
+/* Glassmorphism Panels */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+html.dark .glass-panel {
+  background: rgba(30, 35, 41, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* AI gradients */
+.ai-gradient-text {
+  background: linear-gradient(90deg, #8A2BE2 0%, #0066FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ai-gradient-bg {
+  background: linear-gradient(90deg, #8A2BE2 0%, #0066FF 100%);
+}
+
+/* Pulse effects for AI glows */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(0, 102, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(138, 43, 226, 0.4);
+  }
+}
+
+.ai-glow {
+  animation: pulse-glow 3s infinite;
+}
+
+/* Price Flash Animations */
+@keyframes flash-up {
+  0% { background-color: rgba(59, 225, 148, 0.25); }
+  100% { background-color: transparent; }
+}
+
+@keyframes flash-down {
+  0% { background-color: rgba(255, 180, 171, 0.25); }
+  100% { background-color: transparent; }
+}
+
+.flash-up {
+  animation: flash-up 1s ease-out;
+}
+
+.flash-down {
+  animation: flash-down 1s ease-out;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #323538;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #424656;
+}
+
+/* Custom styles for TradingView widget integration */
+.tv-chart-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Hide tailwind inputs outline rings */
+input:focus {
+  outline: none;
+  box-shadow: none !important;
+}
+
+/* Order Book Depth Bars */
+.depth-bar-bid {
+  background: rgba(59, 225, 148, 0.12);
+  transition: width 0.3s ease;
+}
+
+.depth-bar-ask {
+  background: rgba(255, 180, 171, 0.12);
+  transition: width 0.3s ease;
+}

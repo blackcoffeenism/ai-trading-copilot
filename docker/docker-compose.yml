@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # 1. FastAPI Gateway Backend
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
+      - SUPABASE_JWT_SECRET=super-secret-supabase-jwt-token-key-must-be-long-and-secure
+      - AI_SERVICE_URL=http://ai:8001
+      - FORECAST_SERVICE_URL=http://forecast:8002
+    depends_on:
+      - ai
+      - forecast
+
+  # 2. Qwen AI Analysis service
+  ai:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.ai
+    ports:
+      - "8001:8001"
+    environment:
+      - PYTHONPATH=/app
+
+  # 3. Chronos Forecasting service
+  forecast:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.forecast
+    ports:
+      - "8002:8002"
+    environment:
+      - PYTHONPATH=/app
+
+  # 4. React SPA UI (Nginx)
+  frontend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
